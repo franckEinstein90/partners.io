@@ -16,7 +16,10 @@ function toRadians(degValue)  {
 function perFrame(motion){
   return motion/FPS;
 }
-var ship = newShip(canv.width/2, canv.height/2)
+
+var space = new Space2D("rectangle", canv.width, canv.height);
+var ship = newShip(new coordinates(canv.width/2, canv.height/2));
+
 document.addEventListener("keydown", keyDown);
 document.addEventListener("keyup", keyUp);
 setInterval(update, 1000 / FPS);
