@@ -1,9 +1,14 @@
-function newShip(initX, initY){
-  var ship={ x: initX,  y: initY, radius: SHIP_SIZE/2, angle: toRadians(90),
+function newShip( point ){
+  var ship={
+    x: point.xPos ,  y: point.yPos,
+    radius: SHIP_SIZE/2, angle: toRadians(90),
     rotation: 0, thrusting: false,
     thrustMagnitude: { x:0, y:0 },
 
-    /***************************************************************************/  
+    getCoordinates : function(){
+      return newPoint(this.x, this.y);
+    },
+    /***************************************************************************/
     draw : function(ctx){
         ctx.strokeStyle = "white";
         ctx.lineWidth = SHIP_SIZE/19;
