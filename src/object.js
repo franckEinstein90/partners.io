@@ -8,6 +8,10 @@ function newShip( point ){
     getCoordinates : function(){
       return newPoint(this.x, this.y);
     },
+    applyThrust : function(){
+	this.thrustMagnitude.x += perFrame(SHIP_THRUST * Math.cos(ship.angle));
+	this.thrustMagnitude.y -= perFrame(SHIP_THRUST * Math.sin(ship.angle));;
+	},
     /***************************************************************************/
     draw : function(ctx){
         ctx.strokeStyle = "white";

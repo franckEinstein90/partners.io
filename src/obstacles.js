@@ -5,10 +5,6 @@ const ROIDS_SPD = 49;
 const ROIDS_SIZE = 99;
 const ROIDS_VERT = 10;
 
-var obstacleSet = {
-  roids: []
-};
-
 function newAsteroid(x,y){
   var roid ={
     x: x,
