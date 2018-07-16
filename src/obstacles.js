@@ -6,6 +6,7 @@ const ROIDS_SIZE = 99;
 const ROIDS_VERT = 10;
 
 function newAsteroid(x,y){
+
   var roid ={
     x: x,
     y: y,
