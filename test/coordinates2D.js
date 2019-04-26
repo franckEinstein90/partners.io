@@ -2,8 +2,29 @@ const expect = require('chai').expect;
 const coordinateSystem2D = require('../src/coordinates2D').coordinateSystem2D;
 
 
+describe('coordinateSystem2D.Point2D()', function() {
+    it('is created using two numbers', function(){
+        let p1 = new coordinateSystem2D.Point2D(1,1);
+        expect(p1).to.be.an.instanceof(coordinateSystem2D.Point2D);    
+    })
+    describe('Point2D.vectorTo(p)', function(){
+        it('returns the vector from this point to the argument point', function(){
+           let p1 = new coordinateSystem2D.Point2D(1,1),
+               p2 = new coordinateSystem2D.Point2D(2,3), 
+               v1 = p1.vectorTo(p2);
+               expect(v1).to.be.an.instanceof(coordinateSystem2D.Vector2D);
+               expect(v1.x).to.equal(1);
+               expect(v1.y).to.equal(2);
+        })  
+    })
+})
 
 describe('coordinateSystem2D.Vector2D()', function() {
+    it('can be created using two numbers', function(){
+       let v1 = new coordinateSystem2D.Vector2D(1,1);
+       expect(v1).to.be.an.instanceof(coordinateSystem2D.Vector2D);    
+    })
+
     it('has a magnitude function', function(){
        let p1 = new coordinateSystem2D.Vector2D(1,1);
        expect(p1).to.have.property('magnitude');
