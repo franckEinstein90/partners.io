@@ -25,6 +25,14 @@ describe('coordinateSystem2D.Vector2D()', function() {
        expect(v1).to.be.an.instanceof(coordinateSystem2D.Vector2D);    
     })
 
+    it('can be created with two point2D', function(){
+       let p1 = new coordinateSystem2D.Point2D(0,0),
+           p2 = new coordinateSystem2D.Point2D(3,4),
+           v1 = new coordinateSystem2D.Vector2D(p1, p2);
+       expect(v1).to.be.an.instanceof(coordinateSystem2D.Vector2D);    
+    })
+
+
     it('has a magnitude function', function(){
        let p1 = new coordinateSystem2D.Vector2D(1,1);
        expect(p1).to.have.property('magnitude');
