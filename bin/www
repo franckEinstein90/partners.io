@@ -8,6 +8,8 @@ var app = require('../app');
 var debug = require('debug')('pardners:server');
 var http = require('http');
 
+const games = require('./games');
+
 /**
  * Get port from environment and store in Express.
  */
@@ -28,12 +30,26 @@ var io = require('socket.io')(server);
 
 server.listen(port);
 
+
+const gameStatus = (function(){
+
+    return{
+        starting:1,
+        ongoing:2,
+        concluding:3
+    };
+})();
+
+
+
+
 io.on('connection', function(socket){
     console.log('a user connected');
 
-    socket.on('socket alive', function(msg){
-        console.log('socket alive :' + msg);
+    socket.on('new player', function(player){
+        games.newPlayer(player);
     });
+
 });
 
 

@@ -1,3 +1,12 @@
+/*******************************************************************
+* main.js 
+* FranckEinstein90 
+*
+*******************************************************************/
+
+
+
+
 const gameVariables = (function(){
     let _FPS = 30, 
         _FRICTION = 0.7,
@@ -6,8 +15,11 @@ const gameVariables = (function(){
         _SHIP_THRUST = 5;//acceleration in pixels/(second*second)
 
     return{
-        FPS         : function(){return _FPS;},
-        FRICTION    : function(){return _FRICTION;},
+        FPS    : function()
+        {
+                return _FPS; 
+        },
+        FRICTION    : function(){return _FRICTION; },
         SHIP_SIZE   : function(){return _SHIP_SIZE;},
         TURN_SPEED  : function(){return _TURN_SPEED;},
         SHIP_THRUST : function(){return _SHIP_THRUST;},
@@ -17,18 +29,23 @@ const gameVariables = (function(){
 
 const userCommands = ['<-','->','SPACE'];
 
-$( document ).ready(function(){
 
-    var socket = io();
-    socket.emit('socket', "->");     
+$( document ).ready(function(){
+    const player = new players.Player();    
+    const socket = io();
+    socket.emit('new player', player);     
+
+
     /*****************************************************************
      * Game Objects
-     * **************************************************************
+     *
+     * ***************************************************************
+
     /** @type {htmlCanvasElement} */
     console.log("Start Game");
     let ctx = $("#gameCanvas")[0].getContext('2d');
-    var obstacleSet = { roids: [] };
-    var ship = newShip(coordinates(canv.width/2, canv.height/2));
+    ctx.fillStyle = 'green';
+    ctx.fillRect(10,10,150,100);
 
 });
 
