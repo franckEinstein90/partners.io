@@ -1,13 +1,13 @@
 /*******************************************************************************
  * games namespace
- * FranckEinstein
+ * FranckEinstein90
  *
  * Game manager. Manages players, games ongoing, rounds.
  * ****************************************************************************/
 
+const gameModes = require('./gameModes');
 
 const gameStatus = (function() {
-
     return {
         starting: 1,
         ongoing: 2,
@@ -63,3 +63,5 @@ const games = (function() {
 
     };
 })();
+
+module.exports = games;
