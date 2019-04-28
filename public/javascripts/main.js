@@ -6,7 +6,6 @@
 
 
 
-
 const gameVariables = (function(){
     let _FPS = 30, 
         _FRICTION = 0.7,
@@ -30,22 +29,28 @@ const gameVariables = (function(){
 const userCommands = ['<-','->','SPACE'];
 
 
+
+
 $( document ).ready(function(){
+
     const player = new players.Player();    
     const socket = io();
+
     socket.emit('new player', player);     
 
 
     /*****************************************************************
      * Game Objects
      *
-     * ***************************************************************
+     ****************************************************************/
 
     /** @type {htmlCanvasElement} */
     console.log("Start Game");
     let ctx = $("#gameCanvas")[0].getContext('2d');
-    ctx.fillStyle = 'green';
-    ctx.fillRect(10,10,150,100);
+    viewport.ctx(ctx);
+
+    viewport.draw(viewport.elements.background);
+    viewport.draw(viewport.elements.player); 
 
 });
 
