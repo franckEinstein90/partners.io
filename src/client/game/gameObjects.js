@@ -7,10 +7,17 @@
 const gameObjects = (function(){
 
     return{
-        Pod:
-        Shield:
-        
-
+        Object: function(bR){
+            this.boundingRectangle = bR;
+            this.position = bR.center();
+        }, 
+        Pod(position /* coordinates2D.Point2D */){
+           let upperLeft = new coordinateSystem2D.Point2D(position.x - 5, position.y - 10), 
+           lowerRight = new coordinateSystem2D.Point2D(position.x + 5, position.y + 10), 
+           boundingRectangle = new coordinateSystem2D.BoundingRectangle(upperLeft, lowerRight); 
+           return new gameObjects.Object(boundingRectangle);
+ 
+        }
     };
 })();
 

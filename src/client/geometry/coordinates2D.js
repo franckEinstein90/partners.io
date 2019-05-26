@@ -1,5 +1,5 @@
 /******************************************************************************
- * coordinate2D.js
+ * coordinates2D.js
  * FranckEinstein90
  * ----------------
  *
@@ -31,9 +31,9 @@ const System = (function() {
 /*****************************************************************************
  *
  *
- *****************************************************************************/
+ * ***************************************************************************/
 
-const coordinateSystem2D = (function() {
+const coordinates2D = (function() {
 
     let origin = Screen["topleft"],
         system = System["cartesian"],
@@ -41,14 +41,13 @@ const coordinateSystem2D = (function() {
             height: 9000,
             width: 16000
         },
-        isPoint2D = x => x instanceof coordinateSystem2D.Point2D;
+        isPoint2D = x => x instanceof coordinates2D.Point2D;
 
     return {
-        setWidth: function(w) {
+        width: function(w) {
             shape.width = w;
         },
-        setHeight: function(h) {
-
+        height: function(h) {
             shape.height = h;
         },
         setViewport: function(o) {
@@ -56,9 +55,9 @@ const coordinateSystem2D = (function() {
         },
 
         /*******************************************************
-         * The namespace defines the classes:
+         * The namespace defines 3 classes:
          *   - Point2D: a coordinate in 2D space with methods
-         *   - BoundingRectangle: make of two points
+         *     
          *   - Vector2D: a vector in 2D space with methods 
          *     magnitude, normalize
          *   - Basis: A set of 2 non-parallel vectors
@@ -83,11 +82,11 @@ const coordinateSystem2D = (function() {
         Vector2D: function(a, b) {
             if (isPoint2D(a) && isPoint2D(b)) { //a,b are points
                 let v = a.vectorTo(b);
-                coordinateSystem2D.Point2D.call(this, v.x, v.y);
+                coordinates2D.Point2D.call(this, v.x, v.y);
                 return;
             }
             //a,b are numbers
-            coordinateSystem2D.Point2D.call(this, a, b);
+            coordinates2D.Point2D.call(this, a, b);
         },
 /******************************************************************************
  * title
@@ -123,16 +122,17 @@ const coordinateSystem2D = (function() {
  * Methods for Point2D
  *
  * ***************************************************************************/
-coordinateSystem2D.Point2D.prototype.vectorTo = function(p) {
-    return new coordinateSystem2D.Vector2D(p.x - this.x, p.y - this.y);
+
+coordinates2D.Point2D.prototype.vectorTo = function(p) {
+    return new coordinates2D.Vector2D(p.x - this.x, p.y - this.y);
 }
 
 /*****************************************************************************
  * Methods for BoundingRectangle 
  *
  * ***************************************************************************/
-coordinateSystem2D.BoundingRectangle.prototype.center = function(){
-   return new coordinateSystem2D.Point2D(
+coordinates2D.BoundingRectangle.prototype.center = function(){
+   return new coordinates2D.Point2D(
         (this.topLeft.x + this.bottomRight.x)/2, 
         (this.topLeft.y + this.bottomRight.y)/2);
 }
@@ -142,15 +142,20 @@ coordinateSystem2D.BoundingRectangle.prototype.center = function(){
  *
  * ***************************************************************************/
 
-coordinateSystem2D.Vector2D.prototype = Object.create(coordinateSystem2D.Point2D.prototype);
-coordinateSystem2D.Vector2D.prototype.constructor = coordinateSystem2D.Vector2D;
+//coordinateSystem2D.Vector2D.prototype = Object.create(coordinateSystem2D.Point2D.prototype);
+coordinateSystem2D.Vector2D.prototype.constructor = coordinates2D.Vector2D;
 coordinateSystem2D.Vector2D.prototype.magnitude = function() {
     return Math.sqrt((this.x * this.x) + (this.y * this.y));
 }
 coordinateSystem2D.Vector2D.prototype.normalize = function() {
     let mag = this.magnitude();
     if (mag > 0) {
-        return new coordinateSystem2D.Vector2D(this.x / mag, this.y / mag);
+        return new coordinates2D.Vector2D(this.x / mag, this.y / mag);
     }
     return undefined;
 }
+
+
+module.exports = {
+    coordinates2D
+};

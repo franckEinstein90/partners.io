@@ -3,8 +3,9 @@
 * FranckEinstein90 
 *
 *******************************************************************/
+const pardnerClient = require('./game/pardnerClient').pardnerClient;
 
-
+/*const coordinates2D = require('./geometry/coordinates2D').coordinates2D;
 
 const gameVariables = (function(){
     let _FPS = 30, 
@@ -27,30 +28,40 @@ const gameVariables = (function(){
 })();
 
 const userCommands = ['<-','->','SPACE'];
-
-
-
+*/
 
 $( document ).ready(function(){
-
-    const player = new players.Player();    
-    const socket = io();
+    pardnerClient.initialize();  
+    /* Create and register a new player */
+/*    let player = new players.Player(), 
+        socket = io();
 
     socket.emit('new player', player);     
 
+    let newPoint = (x,y)=>new coordinates2D.Point2D(x,y), 
+        tl = newPoint(20, 20),
+        br = newPoint(50, 100),
+        boundingRectangle = new coordinates2D.BoundingRectangle(tl, br);
 
+
+    gameObject = new gameObjects.Object(boundingRectangle),
+
+    pod1  = gameObjects.Pod(br),
+    gameObjectArray = [], 
+
+gameObjectArray.push(pod1);
     /*****************************************************************
      * Game Objects
      *
      ****************************************************************/
 
     /** @type {htmlCanvasElement} */
-    console.log("Start Game");
+/*    console.log("Start Game");
     let ctx = $("#gameCanvas")[0].getContext('2d');
-    viewport.ctx(ctx);
 
-    viewport.draw(viewport.elements.background);
-    viewport.draw(viewport.elements.player); 
+/*    viewport.ctx(ctx);
+    viewport.drawBackground();
+    viewport.draw(gameObjectArray); */
 
 });
 
