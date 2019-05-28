@@ -31,22 +31,11 @@ const userCommands = ['<-','->','SPACE'];
 */
 
 $( document ).ready(function(){
-    pardnerClient.initialize();  
-    /* Create and register a new player */
-/*    let player = new players.Player(), 
-        socket = io();
-
-    socket.emit('new player', player);     
-
-    let newPoint = (x,y)=>new coordinates2D.Point2D(x,y), 
-        tl = newPoint(20, 20),
-        br = newPoint(50, 100),
-        boundingRectangle = new coordinates2D.BoundingRectangle(tl, br);
+    socket = io(); //open socket to server
+    pardnerClient.initialize(socket);  
 
 
-    gameObject = new gameObjects.Object(boundingRectangle),
-
-    pod1  = gameObjects.Pod(br),
+   pod1  = gameObjects.Pod(boundingRectangle),
     gameObjectArray = [], 
 
 gameObjectArray.push(pod1);
@@ -54,14 +43,6 @@ gameObjectArray.push(pod1);
      * Game Objects
      *
      ****************************************************************/
-
-    /** @type {htmlCanvasElement} */
-/*    console.log("Start Game");
-    let ctx = $("#gameCanvas")[0].getContext('2d');
-
-/*    viewport.ctx(ctx);
-    viewport.drawBackground();
-    viewport.draw(gameObjectArray); */
 
 });
 

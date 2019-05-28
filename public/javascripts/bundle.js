@@ -6,14 +6,19 @@ const games = require('./pardnerClientGame').pardnerClientGame;
 const pardnerClient = (function(){
     let user = undefined,
         players = [],
+        serverSocket = undefined, 
         gameUI = undefined,  
         game = undefined, 
-        registerNewPlayer = function(){ user = new player.Player()},
+        registerNewPlayer = function(){ 
+            user = new player.Player();
+            serverSocket.emit('new player', user);     
+        },
         getPlayers = function(){
 
         }
     return {
-        initialize : function(){
+        initialize : function(socket){
+            serverSocket = socket; 
             try{
                 registerNewPlayer();
                 players = getPlayers(); 
@@ -110,12 +115,11 @@ const userCommands = ['<-','->','SPACE'];
 */
 
 $( document ).ready(function(){
-    pardnerClient.initialize();  
+    socket = io(); //open socket to server
+    pardnerClient.initialize(socket);  
     /* Create and register a new player */
 /*    let player = new players.Player(), 
-        socket = io();
 
-    socket.emit('new player', player);     
 
     let newPoint = (x,y)=>new coordinates2D.Point2D(x,y), 
         tl = newPoint(20, 20),
