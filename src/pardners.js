@@ -7,9 +7,14 @@ const pardners = (function(){
     return {
         getVersion: function(){
             //returns current version of app
+        }
+        errorHandler: function(err, message){
 
         }
-
+        stages: {
+            clientInit: 10
+            clientInGame:20
+        }
     }
 
 }()

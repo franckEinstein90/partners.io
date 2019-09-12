@@ -9,6 +9,8 @@
  *
  * ***************************************************************************/
 
+const pardners = require('../../pardners').pardners
+
 const gameUI = (function(coords) {
 
     let _ctx = undefined,
