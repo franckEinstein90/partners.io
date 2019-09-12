@@ -13,12 +13,10 @@ $(document).ready(function() {
     let $gameCanvas, socket, init
 
     init = function() {
-
-
         try {
-            $gameCanvas = $('#gameCanvas')
-            socket = io() //open socket to server
-            user.ready(socket)
+            $gameCanvas = $('#gameCanvas')  //canvas on which game is rendered
+            socket = io()                   //communication server client
+            user.ready(socket)              //user init
             return true
         } catch (err) {
             pardner.errorHandler(err, pardner.stages.clientInit)
@@ -27,6 +25,11 @@ $(document).ready(function() {
     }
 
     if (init()) {
-        gameUI.ready(socket, $gameCanvas);
+        try {
+            gameUI.ready(socket, $gameCanvas)
+        }
+        catch(err){
+            pardner.errorHandler(err, pardner.stages.clientInGame)
+        }
     }
 })
