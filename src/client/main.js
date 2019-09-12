@@ -26,7 +26,7 @@ $(document).ready(function() {
 
     if (init()) {
         try {
-            gameUI.ready(socket, $gameCanvas)
+            gameUI.ready({canvas: $gameCanvas, socket})
         }
         catch(err){
             pardner.errorHandler(err, pardner.stages.clientInGame)
