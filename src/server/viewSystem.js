@@ -9,17 +9,17 @@
 "use strict"
 
 const hbs = require('express-handlebars')
-const viewSystem = (function(){
+const viewSystem = (function () {
 
-    return{
-        configure: function({
-            app, 
+    return {
+        configure: function ({
+            app,
             root
-        }){
+        }) {
             app.engine('hbs', hbs({
-                extname: 'hbs', 
-                defaultLayout: 'main', 
-                layoutsDir: root + '/views/layouts', 
+                extname: 'hbs',
+                defaultLayout: 'main',
+                layoutsDir: root + '/views/layouts',
                 partialsDir: root + '/views/partials/'
             }))
             app.set('view engine', 'hbs')

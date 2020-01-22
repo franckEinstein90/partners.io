@@ -11,27 +11,27 @@
 
 const sqlite3 = require('sqlite3')
 
-const appDatabase = (function(){
+const appDatabase = (function() {
 
-    let _filePath 
+    let _filePath
     let _db = null
 
     return {
 
         configure: function({
-            filePath 
-        }){
+            filePath
+        }) {
             return new Promise((resolve, reject) => {
                 _filePath = filePath
-                _db = new sqlite3.Database(  filePath,  (err)=> {
-                    if(err){
+                _db = new sqlite3.Database(filePath, (err) => {
+                    if (err) {
                         reject(err)
                     } else {
-                        return resolve(1) 
+                        return resolve(1)
                     }
                 })
             })
-        }    
+        }
     }
 
 })()
