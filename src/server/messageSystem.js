@@ -6,23 +6,24 @@
  * Cooperate, compete, or just survive
  *
  * ***************************************************************************/
+
 "use strict"
 
-const appRoot = (function(){
+const messageSystem = (function(){
+    let _io = null
 
-    let _router = null
-
-    return{
-        serve: function(req, res, next){
-            let pageData = {
-                title:'fdas', 
-                subTitle: 'fight or cooperate'
-            }    
-            res.render('index', pageData)
+    return {
+        configure: function( io ){
+            _io = io
+            _io.on('connection', function( socket ){
+                console.log('new user connection')
+            })
         }
     }
+
 })()
 
+
 module.exports = {
-    appRoot
+    messageSystem
 }

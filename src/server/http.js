@@ -51,28 +51,38 @@ const onListening = function(addr) {
     debug('Listening on ' + bind);
 }
 
-const httpServer = function(app) {
+const defaultListener = function(req, res){
+    res.writeHead( 200 )
+    res.end('nothing here')
+}
 
-    let _port = normalizePort(process.env.PORT || '3000')
-    app.set('port', _port)
+const httpServer = function( app ) {
 
-    let _server = http.createServer(app)
-    _server.listen(_port)
+    app.port =  app.implements('localData.port')
+                ? app.port
+                : normalizePort(process.env.PORT || '3000')
+
+    let _server = http.createServer(
+        app.implements('express')
+        ? app.express
+        : defaultListener
+    )
     _server.on('error', x => onError(_port))
     _server.on('listening', x => onListening(_server.address()))
 
     return {
-        on: (message, callback) => _server.on(message, callback),
-        address: _ => _server.address(),
-
-        port: _port,
-        server: _server
+        start : () => {
+            _server.listen( app.port )
+        }
     }
 }
 
 
-
+const addFeature = function( app ){
+    app.server = httpServer( app )
+    app.addFeature({label:"server"})
+}
 
 module.exports = {
-    httpServer
+  addFeature 
 }

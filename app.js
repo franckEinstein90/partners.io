@@ -5,48 +5,29 @@
  * ---------------------------------------------------------------------------
  *
  * Cooperate, compete, or just survive
- * This is the entry point
  * ***************************************************************************/
 "use strict"
 /*****************************************************************************/
 require('module-alias/register')
+/*****************************************************************************/
+const app = {
+    name: "pardners", 
+    root: __dirname
+}
+/*****************************************************************************/
+require('@features').addFeatureSystem( app       ) 
+/*****************************************************************************/
+/*.then( require('@errors').addErrorRecovery      )
+.then( require('@requirements').addRequirements   )
+.then( require('@security').addSecuritySystem     ) //security system 
+*/
+.then( require('@appData').loadLocalAppData       ) //app data
+/*.then( require('@requirements').objects         ) //business objects
+.then( require('@customers').addCustomerModule    )*/
+.then( require('@appEngine').addAppEngine                   ) //app mechanics
+.then( require('@business/marketing').addMarketingModule    ) //marketing
+/*.then( require('@business').paymentSystem       ) //money
+/*****************************************************************************/
+.finally( _ => app.run() )             //we're in business :)
 
-
-const path = require('path')
-
-const routingSystem = require('@routing/routeSystem').routingSystem
-
-const app = require('@server/expressStack').expressStack({
-      root: __dirname,
-      staticFolder: path.join(__dirname, 'public'), 
-      faviconPath: path.join(__dirname, 'public', 'favicon.png'),
-      routingSystem 
-    })
-
-routingSystem.configure( app )
-const httpServer = require('@server/httpServer').httpServer( app )
-
-const appDatabase   = require('@server/db').appDatabase
-const scheduler = require('@scheduler').scheduler
-scheduler.start()
-scheduler.newEvent({
-    frequency : 1, 
-    execute   : x => console.log('da for atum')
- })
-scheduler.newEvent({
-    frequency : 2, 
-    execute   : x => console.log('fdsa fkdlsa fdsa')
- })
-
-
-appDatabase.configure({
-    filePath: './appData.db'
-    })
-.finally( _ => console.log(`pardners running on port ${httpServer.port}`))
-
-
-
-const io = require('socket.io')(httpServer.server)
-const messages = require('@src/messageSystem').messageSystem
-messages.configure(io)
 

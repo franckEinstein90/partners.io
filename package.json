@@ -3,14 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./app.js",
+    "start": "node ./app.js",
+    "dev": "nodemon ./app.js",
     "test": "mocha"
   },
   "_moduleAliases": {
-    "@src": "src",
-    "@server": "src/server",
-    "@routing": "src/server/routing",
-    "@scheduler": "src/scheduler/scheduler"
+    "@appEngine"  : "src/server/appEngine.js", 
+    "@appData"    : "src/server/appData.js", 
+    "@appRoot"    : "src/server/routes/appRoot", 
+    "@business"   : "src/server/business", 
+    "@errors"     : "src/common/errors.js",
+    "@features"   : "src/common/features.js", 
+    "@server"     : "src/server"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
